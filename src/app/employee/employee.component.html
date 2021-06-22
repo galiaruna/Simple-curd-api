@@ -1,0 +1,118 @@
+ <div class="container p-3">
+ <div style = "float:right" *ngIf="!isFormOPen">
+  <button class="btn btn-primary" (click)="newEmployee()">Add New Employee</button>
+  </div>
+  <div style="margin-top:20px">
+       <table class="table" *ngIf="!isFormOPen" >
+           <thead class="thead-dark bg-dark text-white">
+               <th>Employee Id</th>
+               <th>Full Name</th>
+               <th>Job Title</th>
+               <th>Department</th>
+               <th>Location</th>
+               <th>Age</th>
+               <th>Salary</th>
+               <th>Action</th>
+           </thead>
+           <tr *ngFor="let item of emplList | paginate: config;let i = index;">
+           <td scope="row">{{ config.itemsPerPage * (config.currentPage - 1) + i + 1 }}</td> 
+               <td>{{item.fullName}}</td>
+               <td>{{item.jobTitle}}</td>
+               <td>{{item.department}}</td>
+               <td>{{item.location}}</td>
+               <td>{{item.age}}</td>
+               <td>{{item.salary}}</td>
+               <td>
+                 <button class="btn btn-primary" style="margin-right:10px"
+                 (click)="editEmployeeDetails(item,i)">Edit</button>
+                 <button class="btn btn-danger " (click)="delEmployee(i)">Delete</button>
+               </td>
+           </tr>
+          </table>
+          <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+        </div>
+  
+  <form>
+    <h5 *ngIf="addText">Add New Employee Details</h5>  
+    <h5 *ngIf="updateText">Update Employee Details</h5>    
+
+<div class="row p-3" *ngIf="isFormOPen">
+  
+  <div class="col-md-6 ">
+    <div class="form-group mt-3">
+      <label>Full Name</label>
+      <input type="text" class="form-control" id="fullName"
+      required
+      [(ngModel)]="employee.fullName" name="fullName" #fullName='ngModel'>
+      
+    </div>
+    <div class="form-group mt-3">
+      <label>Job Title</label>
+      <input type="text" class="form-control" id="jobTitle"
+      required
+      [(ngModel)]="employee.jobTitle" name="jobTitle" #jobTitle='ngModel'>
+      
+    </div>
+    <div class="form-group mt-3">
+      <label>Department</label>
+      <input type="text" class="form-control" id="department"
+      required
+      [(ngModel)]="employee.department" name="department" #department='ngModel' >
+      
+    </div>
+    <div class="form-group mt-3">
+      <label>Location</label>
+      <input type="text" class="form-control" id="location"
+      required
+      [(ngModel)]="employee.location" name="location" #location='ngModel'>
+      
+    </div>
+    <div class="form-group mt-3">
+      <label>Age</label>
+      <input type="text" class="form-control" id="age"
+      required
+      [(ngModel)]="employee.age" name="age" >
+      
+    </div>
+    <div class="form-group mt-3">
+      <label>Salary</label>
+      <input type="text" class="form-control" id="salary"
+      required
+      [(ngModel)]="employee.salary" name="salary" #salary='ngModel'>
+      
+    </div>
+    <div class="mt-3">
+      <button class="btn btn-success text-center" (click)="save()" style="margin-right:10px">Save</button>
+      <button class="btn btn-danger text-center" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+
+   <div class="col-md-6 p-3">
+    <div class="form-group mt-5">
+      <label>Full Name</label>
+         <div> {{employee.fullName}}</div>
+    </div>
+    <div class="form-group mt-5">
+      <label>Job Title</label>
+      <div> {{employee.jobTitle}}</div>
+    </div>
+    <div class="form-group mt-5">
+      <label>Department</label>
+      <div> {{employee.department}}</div>
+    </div>
+    <div class="form-group mt-5">
+      <label>Location</label>
+      <div> {{employee.location}}</div>
+    </div>
+    <div class="form-group mt-5">
+      <label>Age</label>
+      <div> {{employee.age}}</div>
+    </div>
+    <div class="form-group mt-5">
+      <label>Salary</label>
+      <div> {{employee.salary}}</div>
+    </div>
+  </div>
+</div>
+</form>
+</div> 
